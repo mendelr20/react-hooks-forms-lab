@@ -5,7 +5,6 @@ import Item from "./Item";
 
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchBar, setSearchBar] = useState()
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -17,14 +16,10 @@ function ShoppingList({ items }) {
     return item.category === selectedCategory;
   });
 
-  function onSearchChange(event){
-    setSearchBar(event.target.value)
-  }
-
   return (
     <div className="ShoppingList">
       <ItemForm />
-      <Filter onCategoryChange={handleCategoryChange} handleSearchChange={onSearchChange} />
+      <Filter onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
