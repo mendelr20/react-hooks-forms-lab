@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
-function ItemForm({setItems, items}) {
+function ItemForm({onItemFormSubmit, items}) {
   
   const [itemName, setName] = useState("")
   const [itemCategory, setCategory] = useState("")
@@ -14,18 +14,18 @@ function ItemForm({setItems, items}) {
     setCategory(e.target.value)
   }
   
-  function onItemFormSubmit(e) {
+  function formSubmit(e) {
     e.preventDefault()
     const newItem = {
       id: uuid(), 
       name: itemName,
       category: itemCategory,
     };
-    setItems([...items, newItem])
+    onItemFormSubmit(newItem)
   }
 
   return (
-    <form className="NewItem" onSubmit={onItemFormSubmit}>
+    <form className="NewItem" onSubmit={formSubmit}>
       <label>
         Name:
         <input type="text" name="name" onChange={handleNameChange} />
